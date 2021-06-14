@@ -7,7 +7,7 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-            Packer.pack("C:\\Users\\Fathyelshemy8\\Desktop\\Backend code assignment - Mobiquity 2021\\src\\main\\test\\resources\\example_input");
+            System.out.println(Packer.pack("C:\\Users\\Fathyelshemy8\\Desktop\\Backend code assignment - Mobiquity 2021\\src\\main\\test\\resources\\example_input"));
         } catch (APIException e) {
             e.printStackTrace();
         }
