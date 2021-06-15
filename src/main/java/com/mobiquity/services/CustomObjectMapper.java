@@ -1,27 +1,42 @@
 package com.mobiquity.services;
 
 import com.mobiquity.dto.Item;
-import com.mobiquity.dto.PackBack;
+import com.mobiquity.dto.BackPack;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class CustomObjectMapper {
-
-    public List<PackBack> mapToPackBacks(List<String> lines) {
+    /**
+     * convert list of strings to backpack pojos
+     * @param lines list lines
+     * @return list of  BackPack object
+     */
+    public List<BackPack> mapToPackBacks(List<String> lines) {
         return lines.stream()
                 .map(this::getPackBack)
                 .collect(Collectors.toList());
     }
 
-    private PackBack getPackBack(String line) {
-        PackBack packBack= new PackBack();
+    /**
+     * used to convert string to pojo BackPack
+     * @param line string contains items & max Weight
+     * @return  Backpack object
+     */
+    private BackPack getPackBack(String line) {
+        BackPack backPack = new BackPack();
         String [] packPackStr=line.split(":");
-        packBack.setMaxWeight(Double.parseDouble(packPackStr[0].trim()));
-        packBack.setItem(getItems(packPackStr[1].trim()));
-        return packBack;
+        backPack.setMaxWeight(Double.parseDouble(packPackStr[0].trim()));
+        backPack.setItem(getItems(packPackStr[1].trim()));
+        return backPack;
     }
+
+    /**
+     *  used to extract items data from lines
+     * @param ItemSection
+     * @return
+     */
     private List<Item> getItems (String ItemSection) {
         return Arrays.stream(ItemSection.split(" "))
                 .map(item-> item.substring(1,item.length()-1))

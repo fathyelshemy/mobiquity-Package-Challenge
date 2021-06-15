@@ -10,7 +10,12 @@ import java.util.stream.Stream;
 import java.util.stream.Collectors;
 
 public class FileOperations {
-
+    /**
+     *
+     * @param filePath absolutePath of inputFile data
+     * @return List of lines inside file
+     * @throws APIException
+     */
     public List<String> readRowLines(String filePath) throws APIException {
         List<String> lines;
         try(Stream<String> linesStream = Files.lines(Path.of(filePath))){

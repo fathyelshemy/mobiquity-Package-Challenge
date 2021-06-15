@@ -1,6 +1,6 @@
 package com.mobiquity.ut.services;
 
-import com.mobiquity.dto.PackBack;
+import com.mobiquity.dto.BackPack;
 import com.mobiquity.services.CustomObjectMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,8 +8,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class CustomObjectMapperTest {
 
@@ -23,13 +21,13 @@ class CustomObjectMapperTest {
     @Test
     void mapToPackBacks_validData() {
         CustomObjectMapper objectMapper= new CustomObjectMapper();
-        List<PackBack>packBacks=objectMapper.mapToPackBacks(lines);
-        Assertions.assertEquals(2,packBacks.size());
-        Assertions.assertEquals(81,packBacks.get(0).getMaxWeight());
-        Assertions.assertEquals(53.38,packBacks.get(0).getItem().get(0).getWeight());
-        Assertions.assertEquals(1,packBacks.get(0).getItem().get(0).getIndex());
-        Assertions.assertEquals(45,packBacks.get(0).getItem().get(0).getValue());
-        Assertions.assertEquals(6,packBacks.get(0).getItem().size());
+        List<BackPack> backPacks =objectMapper.mapToPackBacks(lines);
+        Assertions.assertEquals(2, backPacks.size());
+        Assertions.assertEquals(81, backPacks.get(0).getMaxWeight());
+        Assertions.assertEquals(53.38, backPacks.get(0).getItem().get(0).getWeight());
+        Assertions.assertEquals(1, backPacks.get(0).getItem().get(0).getIndex());
+        Assertions.assertEquals(45, backPacks.get(0).getItem().get(0).getValue());
+        Assertions.assertEquals(6, backPacks.get(0).getItem().size());
     }
 
     @Test

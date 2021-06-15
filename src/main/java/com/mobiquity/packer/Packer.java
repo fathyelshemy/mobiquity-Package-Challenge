@@ -1,7 +1,7 @@
 package com.mobiquity.packer;
 
 import com.mobiquity.dto.Item;
-import com.mobiquity.dto.PackBack;
+import com.mobiquity.dto.BackPack;
 import com.mobiquity.exception.APIException;
 import com.mobiquity.services.CustomObjectMapper;
 import com.mobiquity.services.FileOperations;
@@ -18,24 +18,30 @@ public class Packer {
       List<String> lines=inputReader.readRowLines(filePath);
 
       CustomObjectMapper objectMapper= new CustomObjectMapper();
-      List<PackBack>packBacks= objectMapper.mapToPackBacks(lines);
+      List<BackPack> backPacks = objectMapper.mapToPackBacks(lines);
       StringBuilder output=new StringBuilder();
-      packBacks.forEach(packBack -> output.append(applyGreedyAlgorithm(packBack)).append("\n"));
+      backPacks.forEach(backPack -> output.append(applyGreedyAlgorithm(backPack)).append("\n"));
 
     return output.toString();
   }
 
-  private static String applyGreedyAlgorithm(PackBack packBack) {
+    /**
+     * @apiNote apply Greedy algorithm to solve problem by including
+     *   max value with allowed weight to fill the backpack
+     * @param backPack attribute contains max weight & list<Item> that's used to calculate max N# Item
+     * @return String contains indexes of included Items
+     */
+  private static String applyGreedyAlgorithm(BackPack backPack) {
       var output=new StringBuilder();
 
-      packBack.getItem().stream()
+      backPack.getItem().stream()
               .sorted(Comparator.comparingDouble(Item::getValue)
                       .reversed()
                       .thenComparingDouble(Item::getWeight)
               )
-              .filter(item -> item.getWeight()<packBack.getMaxWeight())
+              .filter(item -> item.getWeight()< backPack.getMaxWeight())
               .forEach(item -> {
-                  packBack.setMaxWeight(packBack.getMaxWeight()-item.getWeight());
+                  backPack.setMaxWeight(backPack.getMaxWeight()-item.getWeight());
                   output.append(String.valueOf(item.getIndex())).append(",");
               });
       if (output.toString().isEmpty())

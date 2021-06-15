@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PackBack {
+public class BackPack {
     private double maxWeight;
     private List<Item> item;
 }
