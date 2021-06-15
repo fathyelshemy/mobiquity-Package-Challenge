@@ -34,11 +34,11 @@ public class CustomObjectMapper {
 
     /**
      *  used to extract items data from lines
-     * @param ItemSection
-     * @return
+     * @param itemSection part from string line contain special format for string
+     * @return list of items
      */
-    private List<Item> getItems (String ItemSection) {
-        return Arrays.stream(ItemSection.split(" "))
+    private List<Item> getItems (String itemSection) {
+        return Arrays.stream(itemSection.split(" "))
                 .map(item-> item.substring(1,item.length()-1))
                 .map(itemStr-> {
                     String [] itemAttributes= itemStr.split(",");
